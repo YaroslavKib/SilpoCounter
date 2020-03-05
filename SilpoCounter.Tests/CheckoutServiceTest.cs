@@ -65,5 +65,32 @@ namespace SilpoCounter.Tests
 
             Assert.Equal(10, check.GetTotalPoints());
         }
+
+        [Fact]
+        void UseOffer_AddOfferPoints()
+        {
+            SetUp();
+
+            checkoutService.AddProduct(milk_7);
+            checkoutService.AddProduct(bread_3);
+
+            checkoutService.UseOffer(new AnyGoodsOffer(6, 2));
+            Check check = checkoutService.CloseCheck();
+
+            Assert.Equal(12, check.GetTotalPoints());
+        }
+
+        [Fact]
+        void UseOffer_WhenCostLessThanRequired_DoNothing()
+        {
+            SetUp();
+
+            checkoutService.AddProduct(bread_3);
+
+            checkoutService.UseOffer(new AnyGoodsOffer(6, 2));
+            Check check = checkoutService.CloseCheck();
+
+            Assert.Equal(3, check.GetTotalPoints());
+        }
     }
 }

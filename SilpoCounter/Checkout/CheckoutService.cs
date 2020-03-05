@@ -21,8 +21,14 @@ namespace SilpoCounter.Checkout
         {
             Check closedCheck = check;
             check = null;
-            
+
             return closedCheck;
+        }
+
+        public void UseOffer(AnyGoodsOffer offer)
+        {
+            if (offer.TotalCost <= check.GetTotalCost())
+                check.AddPoints(offer.Points);
         }
     }
 }
