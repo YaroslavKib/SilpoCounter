@@ -10,7 +10,7 @@ namespace SilpoCounter.Tests
         private CheckoutService checkoutService;
         private Product bread_3;
 
-        private void SetUp()
+        public CheckoutServiceTest()
         {
             checkoutService = new CheckoutService();
             milk_7 = new Product(7, "Milk", Category.Milk);
@@ -20,8 +20,6 @@ namespace SilpoCounter.Tests
         [Fact]
         public void CloseCheck_WithOneProducts_Returns7()
         {   
-            SetUp();
-
             checkoutService.AddProduct(milk_7);
             Check check = checkoutService.CloseCheck();
 
@@ -31,8 +29,6 @@ namespace SilpoCounter.Tests
         [Fact]
         public void CloseCheck_WithTwoProducts_Returns10()
         {    
-            SetUp();
-    
             checkoutService.AddProduct(milk_7);
             checkoutService.AddProduct(bread_3);
             Check check = checkoutService.CloseCheck();    
@@ -43,8 +39,6 @@ namespace SilpoCounter.Tests
         [Fact]
         public void AddProduct_WhenCheckIsClosed_OpensNewCheck()
         {
-            SetUp();
-
             checkoutService.AddProduct(milk_7);
             Check milkCheck = checkoutService.CloseCheck();
             Assert.Equal(7, milkCheck.GetTotalCost());
@@ -57,8 +51,6 @@ namespace SilpoCounter.Tests
         [Fact]
         public void CloseCheck_CalcTotalPoints()
         {
-            SetUp();
-
             checkoutService.AddProduct(milk_7);
             checkoutService.AddProduct(bread_3);
             Check check = checkoutService.CloseCheck();
@@ -69,8 +61,6 @@ namespace SilpoCounter.Tests
         [Fact]
         public void UseOffer_AddOfferPoints()
         {
-            SetUp();
-
             checkoutService.AddProduct(milk_7);
             checkoutService.AddProduct(bread_3);
 
@@ -83,8 +73,6 @@ namespace SilpoCounter.Tests
         [Fact]
         public void UseOffer_WhenCostLessThanRequired_DoNothing()
         {
-            SetUp();
-
             checkoutService.AddProduct(bread_3);
 
             checkoutService.UseOffer(new AnyGoodsOffer(6, 2));
@@ -96,8 +84,6 @@ namespace SilpoCounter.Tests
         [Fact]
         public void UseOffer_FactorByCategory()
         {
-            SetUp();
-
             checkoutService.AddProduct(milk_7);
             checkoutService.AddProduct(milk_7);
             checkoutService.AddProduct(bread_3);;
