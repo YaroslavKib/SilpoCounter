@@ -27,7 +27,13 @@ namespace SilpoCounter.Checkout
 
         public void UseOffer(AnyGoodsOffer offer)
         {
-            if (offer.TotalCost <= check.GetTotalCost())
+            if (offer is FactorByCategoryOffer)
+            {
+                var fbOffer = offer as FactorByCategoryOffer;
+                var points = check.GetCostByCategory(fbOffer.Category);
+                check.AddPoints(points * (fbOffer.Factor - 1));
+            }
+            else if (offer.TotalCost <= check.GetTotalCost())
                 check.AddPoints(offer.Points);
         }
     }

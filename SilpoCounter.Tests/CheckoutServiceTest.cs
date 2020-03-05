@@ -13,7 +13,7 @@ namespace SilpoCounter.Tests
         private void SetUp()
         {
             checkoutService = new CheckoutService();
-            milk_7 = new Product(7, "Milk");
+            milk_7 = new Product(7, "Milk", Category.Milk);
             bread_3 = new Product(3, "Bread");
         }
 
@@ -55,7 +55,7 @@ namespace SilpoCounter.Tests
         }
 
         [Fact]
-        void CloseCheck_CalcTotalPoints()
+        public void CloseCheck_CalcTotalPoints()
         {
             SetUp();
 
@@ -67,7 +67,7 @@ namespace SilpoCounter.Tests
         }
 
         [Fact]
-        void UseOffer_AddOfferPoints()
+        public void UseOffer_AddOfferPoints()
         {
             SetUp();
 
@@ -81,7 +81,7 @@ namespace SilpoCounter.Tests
         }
 
         [Fact]
-        void UseOffer_WhenCostLessThanRequired_DoNothing()
+        public void UseOffer_WhenCostLessThanRequired_DoNothing()
         {
             SetUp();
 
@@ -91,6 +91,21 @@ namespace SilpoCounter.Tests
             Check check = checkoutService.CloseCheck();
 
             Assert.Equal(3, check.GetTotalPoints());
+        }
+
+        [Fact]
+        public void UseOffer_FactorByCategory()
+        {
+            SetUp();
+
+            checkoutService.AddProduct(milk_7);
+            checkoutService.AddProduct(milk_7);
+            checkoutService.AddProduct(bread_3);;
+
+            checkoutService.UseOffer(new FactorByCategoryOffer(Category.Milk, 2));
+            Check check = checkoutService.CloseCheck();
+
+            Assert.Equal(31, check.GetTotalPoints());
         }
     }
 }

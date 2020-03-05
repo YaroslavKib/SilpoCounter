@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 
 namespace SilpoCounter.Checkout
 {
@@ -19,6 +20,12 @@ namespace SilpoCounter.Checkout
 
         public void AddPoints(int points)
             => this.points += points;
+
+        public int GetCostByCategory(Category category)
+            => Products
+            .Where(p => p.Category == category)
+            .Select(p => p.Price)
+            .Aggregate((a, b) => a + b);
 
         public void AddProduct(Product product)
             => Products.Add(product);
