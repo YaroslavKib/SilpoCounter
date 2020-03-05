@@ -19,5 +19,8 @@ namespace SilpoCounter.Checkout
 
         public void AddProduct(Product product)
             => Products.Add(product);
+
+        public int GetTotalPoints()
+            => GetTotalCost();
     }
 }
