@@ -1,5 +1,6 @@
 using System;
 using Xunit;
+using SilpoCounter.Checkout;
 
 namespace SilpoCounter.Tests
 {

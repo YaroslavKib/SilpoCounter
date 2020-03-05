@@ -1,4 +1,4 @@
-namespace SilpoCounter
+namespace SilpoCounter.Checkout
 {
     public class Product
     {
