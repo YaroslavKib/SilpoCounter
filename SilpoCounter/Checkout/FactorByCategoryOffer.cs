@@ -13,7 +13,8 @@ namespace SilpoCounter.Checkout
         
         public override void Apply(Check check)
         {
-
+            var points = check.GetCostByCategory(this.Category);
+            check.AddPoints(points * (this.Factor - 1));
         }
     }
 }

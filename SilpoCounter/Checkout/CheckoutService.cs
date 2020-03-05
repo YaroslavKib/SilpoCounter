@@ -26,22 +26,6 @@ namespace SilpoCounter.Checkout
         }
 
         public void UseOffer(Offer offer)
-        {
-            offer.Apply(check);
-
-            if (offer is FactorByCategoryOffer)
-            {
-                var fbOffer = offer as FactorByCategoryOffer;
-                var points = check.GetCostByCategory(fbOffer.Category);
-                check.AddPoints(points * (fbOffer.Factor - 1));
-            }
-            else if (offer is AnyGoodsOffer)
-            {
-                var agOffer = offer as AnyGoodsOffer;
-                
-                if(agOffer.TotalCost <= check.GetTotalCost())
-                    check.AddPoints(agOffer.Points);
-            }
-        }
+            => offer.Apply(check);
     }
 }

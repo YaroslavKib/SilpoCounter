@@ -13,7 +13,8 @@ namespace SilpoCounter.Checkout
 
         public override void Apply(Check check)
         {
-
+            if (this.TotalCost <= check.GetTotalCost())
+                check.AddPoints(this.Points);
         }
     }
 }
