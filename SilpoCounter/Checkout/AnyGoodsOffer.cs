@@ -1,6 +1,6 @@
 namespace SilpoCounter.Checkout
 {
-    public class AnyGoodsOffer
+    public class AnyGoodsOffer : Offer
     {
         public int TotalCost;
         public int Points;
@@ -9,6 +9,11 @@ namespace SilpoCounter.Checkout
         {
             TotalCost = totalCost;
             Points = points;
+        }
+
+        public override void Apply(Check check)
+        {
+
         }
     }
 }
