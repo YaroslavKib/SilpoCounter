@@ -30,5 +30,19 @@ namespace SilpoCounter.Tests
 
             Assert.True(check.GetTotalCost() == 10);
         }
+        
+        [Fact]
+        public void AddProduct_WhenCheckIsClosed_OpensNewCheck()
+        {
+            CheckoutService checkoutService = new CheckoutService();
+
+            checkoutService.AddProduct(new Product(7, "Milk"));
+            Check milkCheck = checkoutService.CloseCheck();
+            Assert.True(milkCheck.GetTotalCost() == 7);
+
+            checkoutService.AddProduct(new Product(3, "Bred"));
+            Check bredCheck = checkoutService.CloseCheck();
+            Assert.True(bredCheck.GetTotalCost() == 3);
+        }
     }
 }
