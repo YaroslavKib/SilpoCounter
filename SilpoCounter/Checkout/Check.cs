@@ -15,7 +15,7 @@ namespace SilpoCounter.Checkout
             foreach (var product in Products)
                 totalCost += product.Price;
 
-                return totalCost;
+            return totalCost;
         }
 
         public void AddPoints(int points)

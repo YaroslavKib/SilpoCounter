@@ -2,8 +2,8 @@ namespace SilpoCounter.Checkout
 {
     public class AnyGoodsOffer : Offer
     {
-        public int TotalCost;
-        public int Points;
+        public int TotalCost { get; private set; }
+        public int Points { get; private set; }
 
         public AnyGoodsOffer(int totalCost, int points)
         {

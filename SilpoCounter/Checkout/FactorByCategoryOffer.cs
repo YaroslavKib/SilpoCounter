@@ -2,8 +2,8 @@ namespace SilpoCounter.Checkout
 {
     public class FactorByCategoryOffer : Offer
     {
-        public Category Category;
-        public int Factor;
+        public Category Category { get; private set; }
+        public int Factor { get; private set; }
 
         public FactorByCategoryOffer(Category category, int factor)
         {
