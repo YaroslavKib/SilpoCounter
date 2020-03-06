@@ -64,7 +64,7 @@ namespace SilpoCounter.Tests
             checkoutService.AddProduct(milk_7);
             checkoutService.AddProduct(bread_3);
 
-            checkoutService.UseOffer(new AnyGoodsOffer(6, 2));
+            // checkoutService.UseOffer(new AnyGoodsOffer(6, 2));
             Check check = checkoutService.CloseCheck();
 
             Assert.Equal(12, check.GetTotalPoints());
@@ -75,7 +75,7 @@ namespace SilpoCounter.Tests
         {
             checkoutService.AddProduct(bread_3);
 
-            checkoutService.UseOffer(new AnyGoodsOffer(6, 2));
+            // checkoutService.UseOffer(new AnyGoodsOffer(6, 2));
             Check check = checkoutService.CloseCheck();
 
             Assert.Equal(3, check.GetTotalPoints());
@@ -88,7 +88,12 @@ namespace SilpoCounter.Tests
             checkoutService.AddProduct(milk_7);
             checkoutService.AddProduct(bread_3);;
 
-            checkoutService.UseOffer(new FactorByCategoryOffer(Category.Milk, 2));
+            CostByCategoryCondition condition = new CostByCategoryCondition(Category.Milk);
+            FactorReward reward = new FactorReward(2, condition);
+            BonusOffer offer = new BonusOffer(reward, condition);
+
+            checkoutService.UseOffer(offer);
+
             Check check = checkoutService.CloseCheck();
 
             Assert.Equal(31, check.GetTotalPoints());
@@ -103,7 +108,7 @@ namespace SilpoCounter.Tests
             checkoutService.AddProduct(milk_7);
             checkoutService.AddProduct(bread_3);;
 
-            checkoutService.UseOffer(new FactorByCategoryOffer(Category.Milk, 2, ExpiredDate));
+            // checkoutService.UseOffer(new FactorByCategoryOffer(Category.Milk, 2, ExpiredDate));
             Check check = checkoutService.CloseCheck();
 
             Assert.Equal(17, check.GetTotalPoints());
@@ -118,7 +123,7 @@ namespace SilpoCounter.Tests
             checkoutService.AddProduct(milk_7);
             checkoutService.AddProduct(bread_3);;
 
-            checkoutService.UseOffer(new FactorByCategoryOffer(Category.Milk, 2, NotExpiredDate));
+            // checkoutService.UseOffer(new FactorByCategoryOffer(Category.Milk, 2, NotExpiredDate));
             Check check = checkoutService.CloseCheck();
 
             Assert.Equal(31, check.GetTotalPoints());

@@ -27,8 +27,7 @@ namespace SilpoCounter.Checkout
 
         public void UseOffer(Offer offer)
         {
-            if(!offer.IsExpired)
-                offer.Apply(check);
+            offer.Use(check);
         }
     }
 }
