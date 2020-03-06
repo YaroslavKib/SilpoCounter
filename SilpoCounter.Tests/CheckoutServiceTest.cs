@@ -93,5 +93,35 @@ namespace SilpoCounter.Tests
 
             Assert.Equal(31, check.GetTotalPoints());
         }
+
+        [Fact]
+        public void UseOffer_WithExpiredFactorByCategory()
+        {
+            DateTime ExpiredDate = DateTime.Now.Subtract(new TimeSpan(1, 0, 0, 0)); // 1 day
+
+            checkoutService.AddProduct(milk_7);
+            checkoutService.AddProduct(milk_7);
+            checkoutService.AddProduct(bread_3);;
+
+            checkoutService.UseOffer(new FactorByCategoryOffer(Category.Milk, 2, ExpiredDate));
+            Check check = checkoutService.CloseCheck();
+
+            Assert.Equal(17, check.GetTotalPoints());
+        }
+
+        [Fact]
+        public void UseOffer_WithNotExpiredFactorByCategory()
+        {
+            DateTime NotExpiredDate = DateTime.Now.AddDays(1);
+
+            checkoutService.AddProduct(milk_7);
+            checkoutService.AddProduct(milk_7);
+            checkoutService.AddProduct(bread_3);;
+
+            checkoutService.UseOffer(new FactorByCategoryOffer(Category.Milk, 2, NotExpiredDate));
+            Check check = checkoutService.CloseCheck();
+
+            Assert.Equal(31, check.GetTotalPoints());
+        }
     }
 }
